@@ -23,14 +23,14 @@ const TAKEAWAY_FEE: u32 = 1;
 #[derive(Debug, Clone)]
 struct Order {
     dishes_list: Vec<Dish>,
-    is_takeaway: bool
+    is_takeaway: bool,
 }
 
 impl Order {
     fn new() -> Order {
         Order {
             dishes_list: Vec::new(),
-            is_takeaway: false
+            is_takeaway: false,
         }
     }
 
@@ -43,9 +43,7 @@ impl Order {
     }
 
     fn dish_count(&self, dish: Dish) -> u32 {
-        self.dishes_list.iter()
-            .filter(|x| **x == dish)
-            .count() as u32
+        self.dishes_list.iter().filter(|x| **x == dish).count() as u32
     }
 
     fn items_count(&self) -> u32 {
@@ -57,9 +55,7 @@ impl Order {
     }
 
     fn total(&self) -> u32 {
-        let sum = self.dishes_list.iter()
-            .map(|x| x.price())
-            .sum();
+        let sum = self.dishes_list.iter().map(|x| x.price()).sum();
 
         if self.is_takeaway() {
             sum + self.items_count() * TAKEAWAY_FEE
